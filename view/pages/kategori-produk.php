@@ -30,7 +30,7 @@
 
     <div class="content-page">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row card p-3">
           <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
               <div>
