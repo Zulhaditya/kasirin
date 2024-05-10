@@ -50,7 +50,7 @@
                         <thead>
                           <tr class="ligth">
                             <th>No.</th>
-                            <th>ID Barang</th>
+                            <th>Gambar</th>
                             <th>Nama Barang</th>
                             <th>Merk</th>
                             <th>Harga Jual</th>
@@ -60,19 +60,19 @@
                         <tbody>
                           <tr>
                             <td>1</td>
-                            <td>BR001</td>
+                            <td>Gambar</td>
                             <td>Rexona</td>
-                            <td>3</td>
+                            <td>Unilever</td>
                             <td>Rp. 50.000</td>
                             <td>
                               <a class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">Tambah +</a>
                             </td>
                           </tr>
                           <tr>
-                            <td>1</td>
-                            <td>BR001</td>
-                            <td>Rexona</td>
-                            <td>3</td>
+                            <td>2</td>
+                            <td>Gambar</td>
+                            <td>Aqua 150ml</td>
+                            <td>Danone</td>
                             <td>Rp. 50.000</td>
                             <td>
                               <a class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">Tambah +</a>
@@ -98,7 +98,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <p>Cari data penjualan berdasarkan jangka periode tertentu.</p>
+                <p>List data barang berdasarkan transaksi saat ini.</p>
                 <div class="table-responsive rounded mb-3">
                   <table class="data-tables table mb-0 tbl-server-info">
                     <thead class="bg-white text-uppercase">
@@ -110,6 +110,7 @@
                           </div>
                         </th>
                         <th>No.</th>
+                        <th>Gambar</th>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Total</th>
@@ -125,8 +126,14 @@
                           </div>
                         </td>
                         <td>1</td>
+                        <td>Gambar</td>
                         <td>Tanggo Wafer</td>
-                        <td>10</td>
+                        <td>
+                          <div class="form-group w-50">
+                            <input type="text" class="form-control" placeholder="Jumlah" data-errors="Total Semua" required>
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </td>
                         <td>Rp. 25.000</td>
                         <td>
                           <div class="d-flex align-items-center list-action">

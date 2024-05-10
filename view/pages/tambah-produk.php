@@ -43,8 +43,8 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Name *</label>
-                        <input type="text" class="form-control" placeholder="Enter Name" data-errors="Please Enter Name." required>
+                        <label>Nama *</label>
+                        <input type="text" class="form-control" placeholder="Masukkan nama produk" data-errors="Please Enter Name." required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
@@ -64,22 +64,29 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Harga Jual</label>
-                        <input type="text" class="form-control" placeholder="Enter Cost" data-errors="Please Enter Cost." required>
+                        <label>Harga Jual *</label>
+                        <input type="text" class="form-control" placeholder="Masukkan harga jual" data-errors="Please Enter Cost." required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Harga Beli</label>
-                        <input type="text" class="form-control" placeholder="Enter Price" data-errors="Please Enter Price." required>
+                        <label>Harga Beli *</label>
+                        <input type="text" class="form-control" placeholder="Masukkan harga beli" data-errors="Please Enter Price." required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Merk</label>
+                        <input type="text" class="form-control" placeholder="Masukkan merk" required>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label>Kuantitas *</label>
-                        <input type="text" class="form-control" placeholder="Enter Quantity" required>
+                        <input type="text" class="form-control" placeholder="Jumlah" required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>

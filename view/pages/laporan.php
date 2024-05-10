@@ -92,7 +92,7 @@
                     <thead>
                       <tr class="ligth">
                         <th>No.</th>
-                        <th>ID Barang</th>
+                        <th>Gambar</th>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Modal</th>
@@ -103,7 +103,7 @@
                     <tbody>
                       <tr>
                         <td>1</td>
-                        <td>BR001</td>
+                        <td>Gambar</td>
                         <td>Rexona</td>
                         <td>3</td>
                         <td>Rp. 50.000</td>
@@ -112,7 +112,7 @@
                       </tr>
                       <tr>
                         <td>2</td>
-                        <td>BR002</td>
+                        <td>Gambar</td>
                         <td>ABC Choco</td>
                         <td>4</td>
                         <td>Rp. 20.000</td>

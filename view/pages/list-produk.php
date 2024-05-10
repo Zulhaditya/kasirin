@@ -52,7 +52,6 @@
                       </div>
                     </th>
                     <th>Produk</th>
-                    <th>Kode</th>
                     <th>Kategori</th>
                     <th>Merk</th>
                     <th>Harga Jual</th>
@@ -80,7 +79,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>CREM01</td>
                     <td>Beauty</td>
                     <td>$25.00</td>
                     <td>Lakme</td>
@@ -112,7 +110,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>UM01</td>
                     <td>Grocery</td>
                     <td>$30.00</td>
                     <td>Sun</td>
@@ -144,7 +141,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>SEM01</td>
                     <td>Beauty</td>
                     <td>$50.00</td>
                     <td>Blushing</td>
@@ -176,7 +172,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>COF01</td>
                     <td>Food</td>
                     <td>$32.00</td>
                     <td>Nescafe</td>
@@ -208,7 +203,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>FUN01</td>
                     <td>Furniture</td>
                     <td>$30.00</td>
                     <td>Vintage</td>
@@ -240,7 +234,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>DIS01</td>
                     <td>Grocery</td>
                     <td>$30.00</td>
                     <td>Rancher's</td>
@@ -272,7 +265,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>NIS01</td>
                     <td>Shoes</td>
                     <td>$78.00</td>
                     <td>Nike</td>
@@ -304,7 +296,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>COG01</td>
                     <td>Frames</td>
                     <td>$25.00</td>
                     <td>Ray-Ban</td>
@@ -336,7 +327,6 @@
                         </div>
                       </div>
                     </td>
-                    <td>AJS01</td>
                     <td>Jewellery</td>
                     <td>$150.00</td>
                     <td>Jazzin</td>
