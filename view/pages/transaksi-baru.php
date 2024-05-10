@@ -13,9 +13,10 @@
   <link rel="stylesheet" href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="../../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
   <link rel="stylesheet" href="../../assets/vendor/remixicon/fonts/remixicon.css">
+
 </head>
 
-<body class="  ">
+<body class=" color-light ">
   <!-- loader Start -->
   <div id="loading">
     <div id="loading-center">
@@ -24,106 +25,163 @@
   <!-- loader END -->
   <!-- Wrapper Start -->
   <div class="wrapper">
-
     <?php include "../components/sidebar.php"; ?>
     <?php include "../components/topbar.php"; ?>
 
     <div class="content-page">
-      <div class="container-fluid add-form-list">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
-                  <h4 class="card-title">Transaksi Baru</h4>
+                  <h4 class="card-title"><i class="ri-search-fill"></i>Cari Barang</h4>
                 </div>
               </div>
               <div class="card-body">
-                <form action="page-list-purchase.html" data-toggle="validator">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="dob">Date *</label>
-                        <input type="date" class="form-control" id="dob" name="dob" />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Purchase No *</label>
-                        <input type="text" class="form-control" placeholder="Purchase No" required>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Supplier</label>
-                        <select name="type" class="selectpicker form-control" data-style="py-0">
-                          <option>Select Supplier</option>
-                          <option>Test Supplier</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Received</label>
-                        <select name="type" class="selectpicker form-control" data-style="py-0">
-                          <option>Received</option>
-                          <option>Not received yet</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Order Tax</label>
-                        <select name="type" class="selectpicker form-control" data-style="py-0">
-                          <option>No Text</option>
-                          <option>GST @5%</option>
-                          <option>VAT @20%</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Discount</label>
-                        <input type="text" class="form-control" placeholder="Discount">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Shipping</label>
-                        <input type="text" class="form-control" placeholder="Shipping">
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Payment *</label>
-                        <input type="text" class="form-control" placeholder="Payment" required>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Note *</label>
-                        <div id="quill-tool">
-                          <button class="ql-bold" data-toggle="tooltip" data-placement="bottom" title="Bold"></button>
-                          <button class="ql-underline" data-toggle="tooltip" data-placement="bottom" title="Underline"></button>
-                          <button class="ql-italic" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>"></button>
-                          <button class="ql-image" data-toggle="tooltip" data-placement="bottom" title="Upload image"></button>
-                          <button class="ql-code-block" data-toggle="tooltip" data-placement="bottom" title="Show code"></button>
-                        </div>
-                        <div id="quill-toolbar">
-                        </div>
-                      </div>
+                <div class="row">
+                  <div class="col-sm-12 mb-4">
+                    <input type="text" class="form-control" placeholder="Masukkan : Kode / Nama Barang [ENTER]" data-errors="Input masih kosong." required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="col">
+                    <div class="table-responsive">
+                      <table id="datatable" class="table data-tables table-striped">
+                        <thead>
+                          <tr class="ligth">
+                            <th>No.</th>
+                            <th>ID Barang</th>
+                            <th>Nama Barang</th>
+                            <th>Merk</th>
+                            <th>Harga Jual</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>BR001</td>
+                            <td>Rexona</td>
+                            <td>3</td>
+                            <td>Rp. 50.000</td>
+                            <td>
+                              <a class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">Tambah +</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td>BR001</td>
+                            <td>Rexona</td>
+                            <td>3</td>
+                            <td>Rp. 50.000</td>
+                            <td>
+                              <a class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">Tambah +</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                      </table>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary mr-2">Add Purchase</button>
-                  <button type="reset" class="btn btn-danger">Reset</button>
-                </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Page end  -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                  <h4 class="card-title"><i class="ri-wallet-fill"></i>Kasir</h4>
+                </div>
+              </div>
+              <div class="card-body">
+                <p>Cari data penjualan berdasarkan jangka periode tertentu.</p>
+                <div class="table-responsive rounded mb-3">
+                  <table class="data-tables table mb-0 tbl-server-info">
+                    <thead class="bg-white text-uppercase">
+                      <tr class="ligth ligth-data">
+                        <th>
+                          <div class="checkbox d-inline-block">
+                            <input type="checkbox" class="checkbox-input" id="checkbox1" />
+                            <label for="checkbox1" class="mb-0"></label>
+                          </div>
+                        </th>
+                        <th>No.</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Total</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody class="ligth-body">
+                      <tr>
+                        <td>
+                          <div class="checkbox d-inline-block">
+                            <input type="checkbox" class="checkbox-input" id="checkbox9" />
+                            <label for="checkbox9" class="mb-0"></label>
+                          </div>
+                        </td>
+                        <td>1</td>
+                        <td>Tanggo Wafer</td>
+                        <td>10</td>
+                        <td>Rp. 25.000</td>
+                        <td>
+                          <div class="d-flex align-items-center list-action">
+                            <a class="badge bg-success mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#">Update <i class="ri-pencil-line mr-0"></i></a>
+                            <a class="badge bg-warning mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus" href="#">Hapus <i class="ri-delete-bin-line mr-0"></i></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form action="page-list-product.html" data-toggle="validator">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Total Semua</label>
+                    <input type="text" class="form-control" placeholder="Total Semua" data-errors="Total Semua" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Bayar</label>
+                    <input type="text" class="form-control" placeholder="Total Pembayaran" data-errors="Please Enter Cost." required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Kembali</label>
+                    <input type="text" class="form-control" placeholder="Total Kembalian" data-errors="Please Enter Price." required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tanggal Transaksi</label>
+                    <input type="text" class="form-control" placeholder="Tanggal" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mt-3 mb-4">
+                <button type="submit" class="btn btn-primary mr-3">Bayar</button>
+                <button type="reset" class="btn btn-danger">Print</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -27,7 +27,7 @@
     <div class="iq-sidebar sidebar-default">
       <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
         <a href="index.php" class="header-logo mt-2">
-          <img src="./././assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo" />
+          <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo" />
           <h5 class="logo-title light-logo ml-3">Kasirin</h5>
         </a>
         <div class="iq-menu-bt-sidebar ml-0">
