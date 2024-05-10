@@ -1,3 +1,28 @@
+<?php
+require './controller/functions.php';
+
+if (isset($_POST["tombolLogin"])) {
+
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+
+  // cek username
+  $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
+  if (mysqli_num_rows($result) === 1) { // cek apakah ada baris yang dikembalikan oleh database
+
+    // cek password
+    $row = mysqli_fetch_assoc($result);
+    if (password_verify($password, $row["password"])) {
+      header("Location: index.php");
+      exit;
+    }
+  }
+
+  $error = true;
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -35,18 +60,21 @@
                     <div class="p-3">
                       <h2 class="mb-2">Login</h2>
                       <p>Masuk dan kelola transaksi toko anda.</p>
-                      <form>
+                      <form action="" method="post">
                         <div class="row">
                           <div class="col-lg-12">
                             <div class=" form-group">
-                              <label style="font-weight: bold; color: #676E8A;">Email</label>
-                              <input class="floating-input form-control" type="email" placeholder=" ">
+                              <label style="font-weight: bold; color: #676E8A;">Username</label>
+                              <input name="username" class="floating-input form-control" type="text" placeholder=" ">
+                              <?php if (isset($error)) : ?>
+                                <div class="text-danger mt-2 fw-bold">Username atau password salah!</div>
+                              <?php endif; ?>
                             </div>
                           </div>
                           <div class="col-lg-12">
                             <div class="form-group">
                               <label style="font-weight: bold; color: #676E8A;">Password</label>
-                              <input class="floating-input form-control" type="password" placeholder=" ">
+                              <input name="password" class="floating-input form-control" type="password" placeholder=" ">
                             </div>
                           </div>
                           <div class="col-lg-6">
@@ -59,7 +87,7 @@
                             <a href="auth-recoverpw.html" class="text-primary float-right">Lupa password?</a>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign In</button>
+                        <button name="tombolLogin" type="submit" class="btn btn-primary">Masuk</button>
                         <p class="mt-3">
                           Belum punya akun? <a href="register.php" class="text-primary">Daftar.</a>
                         </p>

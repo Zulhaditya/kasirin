@@ -1,3 +1,20 @@
+<?php
+require './controller/functions.php';
+
+if (isset($_POST["tombolRegistrasi"])) {
+
+  if (registrasi($_POST) > 0) {
+    echo "<script>
+            alert('Berhasil mendaftar!');
+            document.location.href = 'login.php';
+          </script>";
+  } else {
+    echo mysqli_error($koneksi);
+  }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -35,46 +52,46 @@
                     <div class="p-3">
                       <h2 class="mb-2">Daftar</h2>
                       <p>Buat akun dan kelola transaksi toko anda.</p>
-                      <form>
+                      <form action="" method="post">
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="floating-label form-group">
-                              <input class="floating-input form-control" type="text" placeholder=" ">
-                              <label>Full Name</label>
+                              <input name="username" class="floating-input form-control" type="text" placeholder=" ">
+                              <label>Username</label>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="floating-label form-group">
-                              <input class="floating-input form-control" type="text" placeholder=" ">
-                              <label>Last Name</label>
+                              <input name="namaToko" class="floating-input form-control" type="text" placeholder=" ">
+                              <label>Nama Toko</label>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="floating-label form-group">
-                              <input class="floating-input form-control" type="email" placeholder=" ">
+                              <input name="email" class="floating-input form-control" type="email" placeholder=" ">
                               <label>Email</label>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="floating-label form-group">
-                              <input class="floating-input form-control" type="text" placeholder=" ">
-                              <label>Phone No.</label>
+                              <input name="phone" class="floating-input form-control" type="text" placeholder=" ">
+                              <label>No. HP</label>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="floating-label form-group">
-                              <input class="floating-input form-control" type="password" placeholder=" ">
+                              <input name="password" class="floating-input form-control" type="password" placeholder=" ">
                               <label>Password</label>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="floating-label form-group">
-                              <input class="floating-input form-control" type="password" placeholder=" ">
+                              <input name="confirmPassword" class="floating-input form-control" type="password" placeholder=" ">
                               <label>Konfirmasi Password</label>
                             </div>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Daftar</button>
+                        <button name="tombolRegistrasi" type="submit" class="btn btn-primary">Daftar</button>
                         <p class="mt-3">
                           Sudah punya akun <a href="login.php" class="text-primary">Login.</a>
                         </p>
