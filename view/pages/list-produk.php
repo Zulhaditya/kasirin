@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+// cek apakah sudah dibuat sesion login
+if (!isset($_SESSION["login"])) {
+  header("Location: ../../login.php");
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+// cek apakah sudah dibuat session login
+if (!isset($_SESSION["login"])) {
+  header("Location: login.php");
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,6 +144,7 @@
               <i class="ri-menu-3-line"></i>
             </button>
             <a href="view/pages/transaksi-baru.php" class="btn border add-btn shadow-none mx-2 d-none d-md-block"><i class="las la-plus mr-2"></i>Transaksi Baru</a>
+            <a href="logout.php" class="btn btn-danger mx-2 d-none d-md-block">Logout</a>
           </div>
         </nav>
       </div>

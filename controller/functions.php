@@ -53,7 +53,7 @@ function registrasi($data)
   mysqli_query($koneksi, "INSERT INTO users VALUES(
     '', 
     '$username',
-    '$password', 
+    '$password',
     '$namaToko',
     '$email', 
     '$phone', 

@@ -1,5 +1,27 @@
 <?php
+
+session_start();
 require './controller/functions.php';
+
+// cek cookie
+if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) {
+  $id = $_COOKIE["id"];
+  $key = $_COOKIE["key"];
+
+  // ambil username berdasarkan id
+  $result = mysqli_query($koneksi, "SELECT username FROM users WHERE id = $id");
+  $row = mysqli_fetch_assoc($result);
+
+  // cek cookie dan username
+  if ($key === hash("sha256", $row["username"])) {
+    $_SESSION["login"] = true;
+  }
+}
+
+if (isset($_SESSION["login"])) {
+  header("Location: index.php");
+  exit;
+}
 
 if (isset($_POST["tombolLogin"])) {
 
@@ -13,6 +35,18 @@ if (isset($_POST["tombolLogin"])) {
     // cek password
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
+
+      // set session login
+      $_SESSION["login"] = true;
+
+      // cek fitur ingat saya menggunakan cookies
+      if ($_POST["remember"]) {
+
+        // buat cookie
+        setcookie("id", $row["id"], time() + 60);
+        setcookie("key", hash("sha256", $row["username"]), time() + 60);
+      }
+
       header("Location: index.php");
       exit;
     }
@@ -23,7 +57,7 @@ if (isset($_POST["tombolLogin"])) {
 ?>
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -79,7 +113,7 @@ if (isset($_POST["tombolLogin"])) {
                           </div>
                           <div class="col-lg-6">
                             <div class="custom-control custom-checkbox mb-3">
-                              <input type="checkbox" class="custom-control-input" id="customCheck1">
+                              <input name="remember" type="checkbox" class="custom-control-input" id="customCheck1">
                               <label class="custom-control-label control-label-1" for="customCheck1">Ingat saya</label>
                             </div>
                           </div>
