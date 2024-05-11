@@ -7,8 +7,8 @@
 - [X] Implementasi fitur session dan cookies.
 
 ### 2. Kelola Data Produk
-- [ ] Implementasi fitur tambah produk.
-- [ ] Implementasi fitur lihat produk.
+- [X] Implementasi fitur tambah produk.
+- [X] Implementasi fitur lihat produk.
 - [ ] Implementasi fitur cari produk berdasarkan nama, kategori, dan merk.
 
 ### 3. Kelola Data Transaksi

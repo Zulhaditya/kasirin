@@ -2,6 +2,12 @@
 
 session_start();
 
+// cek apakah sudah dibuat sesion login
+if (!isset($_SESSION["login"])) {
+  header("Location: ../../login.php");
+  exit;
+}
+
 require '../../controller/functions.php';
 
 // koneksi ke database
@@ -26,12 +32,6 @@ if (isset($_POST["submit"])) {
       </script>
     ";
   }
-}
-
-// cek apakah sudah dibuat sesion login
-if (!isset($_SESSION["login"])) {
-  header("Location: ../../login.php");
-  exit;
 }
 
 ?>

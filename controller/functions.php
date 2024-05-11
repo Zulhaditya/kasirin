@@ -13,7 +13,7 @@ function query($query)
     $rows[] = $row;
   }
 
-  return $row;
+  return $rows;
 }
 
 // function tambah data produk
