@@ -16,6 +16,48 @@ function query($query)
   return $row;
 }
 
+// function tambah data produk
+function tambahProduk($data)
+{
+  global $koneksi;
+
+  // ambil data tiap elemen dari form
+  $nama = htmlspecialchars($data["nama"]);
+  $kategori = htmlspecialchars($data["kategori"]);
+  $merk = htmlspecialchars($data["merk"]);
+  $hargaBeli = htmlspecialchars($data["hargaBeli"]);
+  $hargaJual = htmlspecialchars($data["hargaJual"]);
+  $stok = htmlspecialchars($data["stok"]);
+  $satuan = htmlspecialchars($data["satuan"]);
+  $gambar = htmlspecialchars($data["gambar"]);
+
+  // query insert data
+  $query = "INSERT INTO produk
+            VALUES
+              ('', 
+              '$kategori', 
+              '$nama', 
+              '$merk', 
+              $hargaBeli, 
+              $hargaJual, 
+              $stok, 
+              '$satuan',
+              CURRENT_TIMESTAMP(), 
+              '$gambar' )";
+
+  mysqli_query($koneksi, $query);
+  return mysqli_affected_rows($koneksi);
+}
+
+// function hapus produk
+function hapus($id)
+{
+  global $koneksi;
+
+  mysqli_query($koneksi, "DELETE FROM produk WHERE id = $id");
+  return mysqli_affected_rows($koneksi);
+}
+
 // function registrasi user
 function registrasi($data)
 {

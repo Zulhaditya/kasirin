@@ -80,9 +80,13 @@ if (!isset($_SESSION["login"])) {
                     </div>
                   </div>
                   <div class="col">
+                    <div class="form-group">
+                      <input type="date" class="form-control" id="dob" name="dob" />
+                    </div>
+                  </div>
+                  <div class="col">
                     <button type="button" class="btn btn-primary mt-2"><i class="ri-search-fill"></i>Cari</button>
-                    <button type="button" class="btn btn-success mt-2"><i class="ri-refresh-fill"></i>Refresh</button>
-                    <button type="button" class="btn btn-info mt-2"><i class="ri-bill-fill"></i>Excel</button>
+                    <button type="button" class="btn btn-success mt-2"><i class="ri-bill-fill"></i>Excel</button>
                   </div>
                 </div>
               </div>

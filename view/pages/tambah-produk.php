@@ -2,6 +2,32 @@
 
 session_start();
 
+require '../../controller/functions.php';
+
+// koneksi ke database
+$conn = mysqli_connect("localhost", "root", "", "phpdasar");
+
+// cek apakah tombol submit sudah ditekan atau belum
+if (isset($_POST["submit"])) {
+
+  // cek apakah data berhasil ditambahkan atau tidak
+  if (tambahProduk($_POST) > 0) {
+    echo "
+      <script>
+        alert('Produk berhasil ditambahkan!');
+        document.location.href = '../../index.php';
+      </script>
+    ";
+  } else {
+    echo "
+      <script>
+        alert('Produk gagal ditambahkan.');
+        document.location.href = '../../index.php';
+      </script>
+    ";
+  }
+}
+
 // cek apakah sudah dibuat sesion login
 if (!isset($_SESSION["login"])) {
   header("Location: ../../login.php");
@@ -51,65 +77,64 @@ if (!isset($_SESSION["login"])) {
                 </div>
               </div>
               <div class="card-body">
-                <form action="page-list-product.html" data-toggle="validator">
+                <form action="" method="post">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Nama *</label>
-                        <input type="text" class="form-control" placeholder="Masukkan nama produk" data-errors="Please Enter Name." required>
+                        <input name="nama" type="text" class="form-control" placeholder="Masukkan nama produk" data-errors="Please Enter Name." required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Kategori *</label>
-                        <select name="type" class="selectpicker form-control" data-style="py-0">
-                          <option>Makanan</option>
-                          <option>Minuman</option>
-                          <option>Sembako</option>
-                          <option>Furniture</option>
-                          <option>Shoes</option>
-                          <option>Frames</option>
-                          <option>Jewellery</option>
-                        </select>
+                        <input name="kategori" type="text" class="form-control" placeholder="Masukkan kategori" data-errors="Kategori masih kosong" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Harga Jual *</label>
-                        <input type="text" class="form-control" placeholder="Masukkan harga jual" data-errors="Please Enter Cost." required>
+                        <input name="hargaJual" type="text" class="form-control" placeholder="Masukkan harga jual" data-errors="Harga jual masih kosong" required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Harga Beli *</label>
-                        <input type="text" class="form-control" placeholder="Masukkan harga beli" data-errors="Please Enter Price." required>
+                        <input name="hargaBeli" type="text" class="form-control" placeholder="Masukkan harga beli" data-errors="Harga beli masih kosong" required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Merk</label>
-                        <input type="text" class="form-control" placeholder="Masukkan merk" required>
+                        <input name="merk" type="text" class="form-control" placeholder="Masukkan merk" required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Kuantitas *</label>
-                        <input type="text" class="form-control" placeholder="Jumlah" required>
+                        <label>Stok *</label>
+                        <input name="stok" type="text" class="form-control" placeholder="Jumlah stok" required>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
-                        <label>Gambar</label>
-                        <input type="file" class="form-control image-file" name="pic" accept="image/*">
+                        <label>Gambar *</label>
+                        <input name="gambar" type="file" class="form-control image-file" name="pic" accept="image/*">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Satuan</label>
+                        <input name="satuan" type="text" class="form-control" placeholder="pcs/ml" required>
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary mr-2">Tambah</button>
+                  <button name="submit" type="submit" class="btn btn-primary mr-2">Tambah</button>
                   <button type="reset" class="btn btn-danger">Reset</button>
                 </form>
               </div>

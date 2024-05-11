@@ -189,7 +189,7 @@ if (!isset($_SESSION["login"])) {
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Tanggal Transaksi</label>
-                    <input type="text" class="form-control" placeholder="Tanggal" required>
+                    <input disabled type="text" class="form-control" placeholder="Tanggal" required>
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
