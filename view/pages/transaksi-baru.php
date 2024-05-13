@@ -1,11 +1,20 @@
 <?php
 
 session_start();
+require '../../controller/functions.php';
 
 // cek apakah sudah dibuat sesion login
 if (!isset($_SESSION["login"])) {
   header("Location: ../../login.php");
   exit;
+}
+
+// variable untuk menyimpan hasil pencarian produk
+$produk = [];
+
+// jika tombol search di klik dan keyword pencarian ada
+if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
+  $produk = cari($_POST["keyword"]);
 }
 
 ?>
@@ -53,12 +62,14 @@ if (!isset($_SESSION["login"])) {
               <div class="card-body">
                 <div class="row">
                   <div class="col-sm-12 mb-4">
-                    <input type="text" class="form-control" placeholder="Masukkan : Kode / Nama Barang [ENTER]" data-errors="Input masih kosong." required>
-                    <div class="help-block with-errors"></div>
+                    <form action="" method="post">
+                      <input type="text" class="form-control" name="keyword" autofocus placeholder="Masukkan : Nama / Kategori Barang [ENTER]" autocomplete="off" required>
+                      <button type="submit" name="search" class="btn btn-primary add-list mt-3"><i class="las la-search mr-3"></i>Cari</button>
+                    </form>
                   </div>
                   <div class="col">
                     <div class="table-responsive">
-                      <table id="datatable" class="table data-tables table-striped">
+                      <table id="datatable" class="table table-striped">
                         <thead>
                           <tr class="ligth">
                             <th>No.</th>
@@ -70,26 +81,22 @@ if (!isset($_SESSION["login"])) {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Gambar</td>
-                            <td>Rexona</td>
-                            <td>Unilever</td>
-                            <td>Rp. 50.000</td>
-                            <td>
-                              <a class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">Tambah +</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Gambar</td>
-                            <td>Aqua 150ml</td>
-                            <td>Danone</td>
-                            <td>Rp. 50.000</td>
-                            <td>
-                              <a class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">Tambah +</a>
-                            </td>
-                          </tr>
+                          <?php $i = 1; ?>
+                          <?php foreach ($produk as $row) : ?>
+                            <tr>
+                              <td> <?= $i; ?> </td>
+                              <td> <?= $row["gambar"]; ?> </td>
+                              <td><?= $row["nama"]; ?></td>
+                              <td><?= $row["merk"]; ?></td>
+                              <td><?= $row["harga_jual"]; ?></td>
+                              <td>
+                                <button onclick="tambahKeKasir(this)" data-nama="<?php echo $row['nama']; ?>" data-harga="<?php echo $row['harga_jual']; ?>" data-gambar="<?php echo $row['gambar']; ?>" class="badge bg-primary mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambah" href="#">
+                                  Tambah +
+                                </button>
+                              </td>
+                            </tr>
+                            <?php $i++; ?>
+                          <?php endforeach; ?>
                         </tbody>
                         <tfoot>
                         </tfoot>
@@ -112,7 +119,7 @@ if (!isset($_SESSION["login"])) {
               <div class="card-body">
                 <p>List data barang berdasarkan transaksi saat ini.</p>
                 <div class="table-responsive rounded mb-3">
-                  <table class="data-tables table mb-0 tbl-server-info">
+                  <table id="tabel-kasir" class="table mb-0 tbl-server-info">
                     <thead class="bg-white text-uppercase">
                       <tr class="ligth ligth-data">
                         <th>
@@ -130,30 +137,6 @@ if (!isset($_SESSION["login"])) {
                       </tr>
                     </thead>
                     <tbody class="ligth-body">
-                      <tr>
-                        <td>
-                          <div class="checkbox d-inline-block">
-                            <input type="checkbox" class="checkbox-input" id="checkbox9" />
-                            <label for="checkbox9" class="mb-0"></label>
-                          </div>
-                        </td>
-                        <td>1</td>
-                        <td>Gambar</td>
-                        <td>Tanggo Wafer</td>
-                        <td>
-                          <div class="form-group w-50">
-                            <input type="text" class="form-control" placeholder="Jumlah" data-errors="Total Semua" required>
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </td>
-                        <td>Rp. 25.000</td>
-                        <td>
-                          <div class="d-flex align-items-center list-action">
-                            <a class="badge bg-success mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#">Update <i class="ri-pencil-line mr-0"></i></a>
-                            <a class="badge bg-warning mr-2 p-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus" href="#">Hapus <i class="ri-delete-bin-line mr-0"></i></a>
-                          </div>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -228,6 +211,44 @@ if (!isset($_SESSION["login"])) {
       </div>
     </div>
   </footer>
+
+  <script>
+    function tambahKeKasir(button) {
+      var nomorProduk = 1;
+      var namaProduk = button.getAttribute('data-nama');
+      var hargaProduk = button.getAttribute('data-harga');
+      var gambar = button.getAttribute('data-gambar');
+
+      // Buat elemen HTML untuk produk yang akan ditambahkan ke bagian kasir
+      var produkHTML = '<tr>' +
+        '<td>' +
+        '<div class="checkbox d-inline-block">' +
+        '<input type="checkbox" class="checkbox-input" id="checkbox9" />' +
+        '<label for="checkbox9" class="mb-0"></label>' +
+        '</div>' +
+        '</td>' +
+        '<td>' + nomorProduk + '</td>' +
+        '<td class="nama-gambar">' + gambar + '</td>' +
+        '<td class="nama-produk">' + namaProduk + '</td>' +
+        '<td>' +
+        '<input type="number" class="form-control jumlah-produk" value="1" min="1">' +
+        '</td>' +
+        '<td class="harga-produk">Rp. ' + hargaProduk + '</td>' +
+        '<td>' +
+        '<div class="d-flex align-items-center list-action">' +
+        '<button class="badge bg-success mr-2 p-2 btn-update" data-toggle="tooltip" data-placement="top" title="Edit">Update <i class="ri-pencil-line mr-0"></i></button>' +
+        '<button class="badge bg-warning mr-2 p-2 btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus">Hapus <i class="ri-delete-bin-line mr-0"></i></button>' +
+        '</div>' +
+        '</td>' +
+        '</tr>';
+
+      // Tambahkan elemen produk ke bagian "Kasir"
+      document.getElementById('tabel-kasir').innerHTML += produkHTML;
+
+      nomorProduk++;
+    }
+  </script>
+
   <!-- Backend Bundle JavaScript -->
   <script src="../../assets/js/backend-bundle.min.js"></script>
 

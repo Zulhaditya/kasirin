@@ -12,8 +12,8 @@
 - [X] Implementasi fitur cari produk berdasarkan nama, kategori, dan merk.
 
 ### 3. Kelola Data Transaksi
-- [ ] Implementasi fitur pencarian produk dan pagination.
-- [ ] Menerapkan aksi tambah pada barang yang dicari lalu ditampilkan
+- [X] Implementasi fitur pencarian produk dan pagination.
+- [X] Menerapkan aksi tambah pada barang yang dicari lalu ditampilkan
       pada form kasir.
 - [ ] List data produk berdasarkan produk yang dibeli oleh customer.
 - [ ] Implementasi fitur update dan hapus produk.
