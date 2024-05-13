@@ -3,8 +3,7 @@
 $koneksi = mysqli_connect("localhost", "root", "", "kasirin");
 
 // function query mysql
-function query($query)
-{
+function query($query) {
   global $koneksi;
 
   $result = mysqli_query($koneksi, $query);
@@ -17,8 +16,7 @@ function query($query)
 }
 
 // function tambah data produk
-function tambahProduk($data)
-{
+function tambahProduk($data) {
   global $koneksi;
 
   // ambil data tiap elemen dari form
@@ -50,8 +48,7 @@ function tambahProduk($data)
 }
 
 // function hapus produk
-function hapus($id)
-{
+function hapus($id) {
   global $koneksi;
 
   mysqli_query($koneksi, "DELETE FROM produk WHERE id = $id");
@@ -59,8 +56,7 @@ function hapus($id)
 }
 
 // function registrasi user
-function registrasi($data)
-{
+function registrasi($data) {
   global $koneksi;
 
   // dapatkan data user dari form
@@ -103,4 +99,14 @@ function registrasi($data)
     )");
 
   return mysqli_affected_rows($koneksi);
+}
+
+// function cari produk
+function cari($keyword) {
+  $query = "SELECT * FROM produk 
+    WHERE kategori LIKE '%$keyword%' 
+    OR nama LIKE '%$keyword%' 
+    OR merk LIKE '%$keyword%'
+    ";
+  return query($query);
 }

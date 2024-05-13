@@ -9,7 +9,7 @@
 ### 2. Kelola Data Produk
 - [X] Implementasi fitur tambah produk.
 - [X] Implementasi fitur lihat produk.
-- [ ] Implementasi fitur cari produk berdasarkan nama, kategori, dan merk.
+- [X] Implementasi fitur cari produk berdasarkan nama, kategori, dan merk.
 
 ### 3. Kelola Data Transaksi
 - [ ] Implementasi fitur pencarian produk dan pagination.

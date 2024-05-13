@@ -3,9 +3,6 @@
 session_start();
 require '../../controller/functions.php';
 
-// koneksi ke database
-$koneksi = mysqli_connect("localhost", "root", "", "kasirin");
-
 // cek apakah sudah dibuat sesion login
 if (!isset($_SESSION["login"])) {
   header("Location: ../../login.php");
@@ -13,6 +10,11 @@ if (!isset($_SESSION["login"])) {
 }
 
 $produk = query("SELECT * FROM produk");
+
+// jika tombol search di klik
+if (isset($_POST["search"])) {
+  $produk = cari($_POST["keyword"]);
+}
 
 ?>
 
@@ -58,9 +60,15 @@ $produk = query("SELECT * FROM produk");
               <a href="tambah-produk.php" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Tambah Barang</a>
             </div>
           </div>
+          <div class="col-sm-12 mb-4">
+            <form action="" method="post">
+              <input type="text" class="form-control" name="keyword" autofocus placeholder="Masukkan : Nama / Merk Barang [ENTER]" autocomplete="off" required>
+              <button type="submit" name="search" class="btn btn-primary add-list mt-3"><i class="las la-search mr-3"></i>Cari</button>
+            </form>
+          </div>
           <div class="col-lg-12">
             <div class="table-responsive rounded mb-3">
-              <table class="data-tables table mb-0 tbl-server-info">
+              <table class="table mb-0 tbl-server-info">
                 <thead class="bg-white text-uppercase">
                   <tr class="ligth ligth-data">
                     <th>
@@ -102,8 +110,8 @@ $produk = query("SELECT * FROM produk");
                       </td>
                       <td><?= $row["kategori"]; ?></td>
                       <td><?= $row["merk"]; ?></td>
-                      <td><?= $row["harga_jual"]; ?></td>
-                      <td><?= $row["harga_beli"]; ?></td>
+                      <td><?php echo "Rp. " . intval($row["harga_jual"]); ?></td>
+                      <td><?php echo "Rp. " . intval($row["harga_beli"]); ?></td>
                       <td><?= $row["stok"]; ?></td>
                       <td>
                         <div class="d-flex align-items-center list-action">
