@@ -223,17 +223,17 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
       var produkHTML = '<tr>' +
         '<td>' +
         '<div class="checkbox d-inline-block">' +
-        '<input type="checkbox" class="checkbox-input" id="checkbox9" />' +
-        '<label for="checkbox9" class="mb-0"></label>' +
+        '<input type="checkbox" class="checkbox-input" id="checkbox' + nomorProduk + '" />' +
+        '<label for="checkbox' + nomorProduk + '" class="mb-0"></label>' +
         '</div>' +
         '</td>' +
         '<td>' + nomorProduk + '</td>' +
-        '<td class="nama-gambar">' + gambar + '</td>' +
+        '<td class="nama-gambar"><img src="../../product/' + gambar + '" class="img-fluid rounded avatar-50 mr-3" alt="image" /></td>' +
         '<td class="nama-produk">' + namaProduk + '</td>' +
         '<td>' +
         '<input type="number" class="form-control jumlah-produk" value="1" min="1">' +
         '</td>' +
-        '<td class="harga-produk">Rp. ' + hargaProduk + '</td>' +
+        '<td class="harga-produk" data-harga="' + hargaProduk + '">Rp. ' + hargaProduk + '</td>' +
         '<td>' +
         '<div class="d-flex align-items-center list-action">' +
         '<button class="badge bg-success mr-2 p-2 btn-update" data-toggle="tooltip" data-placement="top" title="Edit">Update <i class="ri-pencil-line mr-0"></i></button>' +
@@ -244,8 +244,51 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
 
       // Tambahkan elemen produk ke bagian "Kasir"
       document.getElementById('tabel-kasir').innerHTML += produkHTML;
-
       nomorProduk++;
+    }
+
+    // event listener untuk fitur tambah produk
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('btn-tambah')) {
+        tambahKeKasir(event.target);
+      }
+    })
+
+    // event listener untuk input jumlah produk dan tombol update serta hapus
+    document.addEventListener('input', function(event) {
+      if (event.target.classList.contains('jumlah-produk')) {
+        updateTotalHarga(event.target);
+      }
+    });
+
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('btn-update')) {
+        updateJumlahProduk(event.target);
+      } else if (event.target.classList.contains('btn-delete')) {
+        hapusProduk(event.target);
+      }
+    });
+
+    // fungsi untuk mengupdate jumlah produk dan total harga di bagian kasir
+    function updateTotalHarga(input) {
+      var row = input.closest('tr');
+      var hargaProduk = parseFloat(row.querySelector('.harga-produk').getAttribute('data-harga'));
+      var jumlahProduk = parseInt(input.value);
+      var totalHarga = hargaProduk * jumlahProduk;
+      row.querySelector('.harga-produk').innerText = 'Rp. ' + totalHarga.toFixed(2);
+    }
+
+    // fungsi untuk mengupdate jumlah produk di bagian kasir
+    function updateJumlahProduk(button) {
+      var row = button.closest('tr');
+      var input = row.querySelector('.jumlah-produk');
+      updateTotalHarga(input);
+    }
+
+    // fungsi untuk menghapus produk dari bagian kasir
+    function hapusProduk(button) {
+      var row = button.closest('tr');
+      row.remove();
     }
   </script>
 

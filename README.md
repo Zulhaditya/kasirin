@@ -15,8 +15,8 @@
 - [X] Implementasi fitur pencarian produk dan pagination.
 - [X] Menerapkan aksi tambah pada barang yang dicari lalu ditampilkan
       pada form kasir.
-- [ ] List data produk berdasarkan produk yang dibeli oleh customer.
-- [ ] Implementasi fitur update dan hapus produk.
+- [X] List data produk berdasarkan produk yang dibeli oleh customer.
+- [X] Implementasi fitur update dan hapus produk.
 - [ ] Saat update produk, hitung total belanja berdasarkan subtotal dari list data produk.
 - [ ] Hitung total, total pembayaran, uang kembalian.
 - [ ] Tampilkan tanggal transaksi saat ini.
