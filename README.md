@@ -20,8 +20,8 @@
 - [X] Saat update produk, hitung total belanja berdasarkan subtotal dari list data produk.
 - [X] Hitung total, total pembayaran, uang kembalian.
 - [X] Tampilkan tanggal transaksi saat ini.
+- [X] Implementasi fitur refresh data transaksi.
 - [ ] Implementasi fitur bayar dan print struk pembelian.
-- [ ] Implementasi fitur refresh data transaksi.
 
 ### 4. Kelola Laporan Penjualan
 - [ ] Cari laporan per bulan/tahun atau menggunakan form date.
