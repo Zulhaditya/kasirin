@@ -175,19 +175,20 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                       </div>
                       <div class="d-flex justify-content-center mt-3 mb-4">
                         <button type="submit" class="btn btn-primary mr-3">Bayar</button>
-                        <button type="reset" class="btn btn-danger">Print</button>
+                        <button type="submit" class="btn btn-danger mr-3">Print</button>
+                        <button type="button" class="btn btn-danger" onclick="resetKasir()">Reset</button>
                       </div>
-                    </form>
                   </div>
+                  </form>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
+  </div>
   </div>
   <!-- Wrapper End-->
   <footer class="iq-footer">

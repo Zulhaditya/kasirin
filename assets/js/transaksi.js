@@ -150,6 +150,18 @@ function setTanggalTransaksi() {
   document.getElementById("tanggal-transaksi").value = formattedDate;
 }
 
+// Fungsi untuk mereset bagian kasir
+function resetKasir() {
+  // Hapus semua produk dari tabel kasir
+  document.getElementById("tabel-kasir").innerHTML = "";
+
+  // Reset nilai input total semua, bayar, kembali, dan tanggal transaksi
+  document.getElementById("total-transaksi").value = "";
+  document.getElementById("uang-dibayar").value = "";
+  document.getElementById("uang-kembalian").value = "";
+  setTanggalTransaksi();
+}
+
 // Panggil fungsi setTanggalTransaksi saat halaman dimuat
 window.onload = function () {
   setTanggalTransaksi();

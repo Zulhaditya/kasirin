@@ -17,7 +17,7 @@
       pada form kasir.
 - [X] List data produk berdasarkan produk yang dibeli oleh customer.
 - [X] Implementasi fitur update dan hapus produk.
-- [ ] Saat update produk, hitung total belanja berdasarkan subtotal dari list data produk.
+- [X] Saat update produk, hitung total belanja berdasarkan subtotal dari list data produk.
 - [X] Hitung total, total pembayaran, uang kembalian.
 - [X] Tampilkan tanggal transaksi saat ini.
 - [ ] Implementasi fitur bayar dan print struk pembelian.
