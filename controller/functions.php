@@ -32,7 +32,7 @@ function tambahProduk($data) {
   // query insert data
   $query = "INSERT INTO produk
             VALUES
-              ('', 
+              (NULL, 
               '$kategori', 
               '$nama', 
               '$merk', 
@@ -89,7 +89,7 @@ function registrasi($data) {
 
   // tambahkan user baru kedalam database
   mysqli_query($koneksi, "INSERT INTO users VALUES(
-    '', 
+    NULL,
     '$username',
     '$password',
     '$namaToko',

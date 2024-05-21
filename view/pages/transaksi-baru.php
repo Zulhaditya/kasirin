@@ -140,50 +140,52 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                     </tbody>
                   </table>
                 </div>
+                <div class="row">
+                  <div class="col">
+                    <form action="page-list-product.html" data-toggle="validator">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Total Semua</label>
+                            <input id="total-transaksi" disabled type="text" class="form-control" placeholder="Total Semua" data-errors="Total Semua" required>
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Bayar</label>
+                            <input id="uang-dibayar" type="text" class="form-control" placeholder="Total Pembayaran" data-errors="Please Enter Cost." required>
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Kembali</label>
+                            <input id="uang-kembalian" type="text" disabled class="form-control" placeholder="Total Kembalian" data-errors="Please Enter Price." required>
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Tanggal Transaksi</label>
+                            <input id="tanggal-transaksi" disabled type="text" class="form-control" placeholder="Tanggal" required>
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center mt-3 mb-4">
+                        <button type="submit" class="btn btn-primary mr-3">Bayar</button>
+                        <button type="reset" class="btn btn-danger">Print</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <form action="page-list-product.html" data-toggle="validator">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Total Semua</label>
-                    <input type="text" class="form-control" placeholder="Total Semua" data-errors="Total Semua" required>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Bayar</label>
-                    <input type="text" class="form-control" placeholder="Total Pembayaran" data-errors="Please Enter Cost." required>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Kembali</label>
-                    <input type="text" class="form-control" placeholder="Total Kembalian" data-errors="Please Enter Price." required>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Tanggal Transaksi</label>
-                    <input disabled type="text" class="form-control" placeholder="Tanggal" required>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mt-3 mb-4">
-                <button type="submit" class="btn btn-primary mr-3">Bayar</button>
-                <button type="reset" class="btn btn-danger">Print</button>
-              </div>
-            </form>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -212,86 +214,6 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
     </div>
   </footer>
 
-  <script>
-    function tambahKeKasir(button) {
-      var nomorProduk = 1;
-      var namaProduk = button.getAttribute('data-nama');
-      var hargaProduk = button.getAttribute('data-harga');
-      var gambar = button.getAttribute('data-gambar');
-
-      // Buat elemen HTML untuk produk yang akan ditambahkan ke bagian kasir
-      var produkHTML = '<tr>' +
-        '<td>' +
-        '<div class="checkbox d-inline-block">' +
-        '<input type="checkbox" class="checkbox-input" id="checkbox' + nomorProduk + '" />' +
-        '<label for="checkbox' + nomorProduk + '" class="mb-0"></label>' +
-        '</div>' +
-        '</td>' +
-        '<td>' + nomorProduk + '</td>' +
-        '<td class="nama-gambar"><img src="../../product/' + gambar + '" class="img-fluid rounded avatar-50 mr-3" alt="image" /></td>' +
-        '<td class="nama-produk">' + namaProduk + '</td>' +
-        '<td>' +
-        '<input type="number" class="form-control jumlah-produk" value="1" min="1">' +
-        '</td>' +
-        '<td class="harga-produk" data-harga="' + hargaProduk + '">Rp. ' + hargaProduk + '</td>' +
-        '<td>' +
-        '<div class="d-flex align-items-center list-action">' +
-        '<button class="badge bg-success mr-2 p-2 btn-update" data-toggle="tooltip" data-placement="top" title="Edit">Update <i class="ri-pencil-line mr-0"></i></button>' +
-        '<button class="badge bg-warning mr-2 p-2 btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus">Hapus <i class="ri-delete-bin-line mr-0"></i></button>' +
-        '</div>' +
-        '</td>' +
-        '</tr>';
-
-      // Tambahkan elemen produk ke bagian "Kasir"
-      document.getElementById('tabel-kasir').innerHTML += produkHTML;
-      nomorProduk++;
-    }
-
-    // event listener untuk fitur tambah produk
-    document.addEventListener('click', function(event) {
-      if (event.target.classList.contains('btn-tambah')) {
-        tambahKeKasir(event.target);
-      }
-    })
-
-    // event listener untuk input jumlah produk dan tombol update serta hapus
-    document.addEventListener('input', function(event) {
-      if (event.target.classList.contains('jumlah-produk')) {
-        updateTotalHarga(event.target);
-      }
-    });
-
-    document.addEventListener('click', function(event) {
-      if (event.target.classList.contains('btn-update')) {
-        updateJumlahProduk(event.target);
-      } else if (event.target.classList.contains('btn-delete')) {
-        hapusProduk(event.target);
-      }
-    });
-
-    // fungsi untuk mengupdate jumlah produk dan total harga di bagian kasir
-    function updateTotalHarga(input) {
-      var row = input.closest('tr');
-      var hargaProduk = parseFloat(row.querySelector('.harga-produk').getAttribute('data-harga'));
-      var jumlahProduk = parseInt(input.value);
-      var totalHarga = hargaProduk * jumlahProduk;
-      row.querySelector('.harga-produk').innerText = 'Rp. ' + totalHarga.toFixed(2);
-    }
-
-    // fungsi untuk mengupdate jumlah produk di bagian kasir
-    function updateJumlahProduk(button) {
-      var row = button.closest('tr');
-      var input = row.querySelector('.jumlah-produk');
-      updateTotalHarga(input);
-    }
-
-    // fungsi untuk menghapus produk dari bagian kasir
-    function hapusProduk(button) {
-      var row = button.closest('tr');
-      row.remove();
-    }
-  </script>
-
   <!-- Backend Bundle JavaScript -->
   <script src="../../assets/js/backend-bundle.min.js"></script>
 
@@ -306,6 +228,9 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
 
   <!-- app JavaScript -->
   <script src="../../assets/js/app.js"></script>
+
+  <!-- script kelola data transaksi -->
+  <script src="../../assets/js/transaksi.js"></script>
 </body>
 
 </html>

@@ -10,9 +10,6 @@ if (!isset($_SESSION["login"])) {
 
 require '../../controller/functions.php';
 
-// koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "phpdasar");
-
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 
