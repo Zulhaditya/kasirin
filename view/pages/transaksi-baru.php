@@ -142,7 +142,7 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                 </div>
                 <div class="row">
                   <div class="col">
-                    <form action="page-list-product.html" data-toggle="validator">
+                    <form data-toggle="validator">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -174,8 +174,8 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                         </div>
                       </div>
                       <div class="d-flex justify-content-center mt-3 mb-4">
-                        <button type="submit" class="btn btn-primary mr-3">Bayar</button>
-                        <button type="submit" class="btn btn-danger mr-3">Print</button>
+                        <button type="button" class="btn btn-primary mr-3" onclick="prosesPembayaran()">Bayar</button>
+                        <button type="button" class="btn btn-danger mr-3" onclick="printStruk()">Print</button>
                         <button type="button" class="btn btn-danger" onclick="resetKasir()">Reset</button>
                       </div>
                   </div>

@@ -8,44 +8,31 @@ function tambahKeKasir(button) {
   var gambar = button.getAttribute("data-gambar");
 
   // Buat elemen HTML untuk produk yang akan ditambahkan ke bagian kasir
-  var produkHTML =
-    "<tr>" +
-    "<td>" +
-    '<div class="checkbox d-inline-block">' +
-    '<input type="checkbox" class="checkbox-input" id="checkbox' +
-    nomorProduk +
-    '" />' +
-    '<label for="checkbox' +
-    nomorProduk +
-    '" class="mb-0"></label>' +
-    "</div>" +
-    "</td>" +
-    "<td>" +
-    nomorProduk +
-    "</td>" +
-    '<td class="nama-gambar"><img src="' +
-    gambar +
-    '" class="img-fluid rounded avatar-50 mr-3" alt="image" /></td>' +
-    '<td class="nama-produk">' +
-    namaProduk +
-    "</td>" +
-    "<td>" +
-    '<input type="number" class="form-control w-50 jumlah-produk" value="1" min="1" oninput="updateTotalHarga(this)">' +
-    "</td>" +
-    '<td class="harga-produk" data-harga="' +
-    hargaProduk +
-    '">Rp. ' +
-    parseInt(hargaProduk).toLocaleString() +
-    "</td>" +
-    "<td>" +
-    '<div class="d-flex align-items-center list-action">' +
-    '<button class="badge bg-warning mr-2 p-2 btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="hapusProduk(this)">Hapus <i class="ri-delete-bin-line mr-0"></i></button>' +
-    "</div>" +
-    "</td>" +
-    "</tr>";
-
+  const produkHTML = `
+    <tr>
+      <td>
+        <div class="checkbox d-inline-block">
+          <input type="checkbox" class="checkbox-input" id="checkbox${nomorProduk}" />
+          <label for="checkbox${nomorProduk}" class="mb-0"></label>
+        </div>
+      </td>
+      <td>${nomorProduk}</td>
+      <td class="nama-gambar"><img src="${gambar}" class="img-fluid rounded avatar-50 mr-3" alt="image" /></td>
+      <td class="nama-produk">${namaProduk}</td>
+      <td><input type="number" class="form-control w-50 jumlah-produk" value="1" min="1" oninput="updateTotalHarga(this)"></td>
+      <td class="harga-produk" data-harga="${hargaProduk}">Rp. ${parseInt(
+    hargaProduk
+  ).toLocaleString()}</td>
+      <td>
+        <div class="d-flex align-items-center list-action">
+          <button class="badge bg-warning mr-2 p-2 btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="hapusProduk(this)">Hapus <i class="ri-delete-bin-line mr-0"></i></button>
+        </div>
+      </td>
+    </tr>`;
   // Tambahkan elemen produk ke bagian "Kasir"
-  document.getElementById("tabel-kasir").innerHTML += produkHTML;
+  document
+    .querySelector("#tabel-kasir tbody")
+    .insertAdjacentHTML("beforeend", produkHTML);
 
   // Tambahkan 1 ke nomorProduk untuk nomor urut produk selanjutnya
   nomorProduk++;
@@ -160,6 +147,118 @@ function resetKasir() {
   document.getElementById("uang-dibayar").value = "";
   document.getElementById("uang-kembalian").value = "";
   setTanggalTransaksi();
+}
+
+// Function untuk menangani pembayaran
+function prosesPembayaran() {
+  const totalTransaksi = document.getElementById("total-transaksi").value;
+  const uangDibayar = document.getElementById("uang-dibayar").value;
+  const uangKembalian = document.getElementById("uang-kembalian").value;
+  const tanggalTransaksi = document.getElementById("tanggal-transaksi").value;
+
+  if (!totalTransaksi || !uangDibayar || !uangKembalian) {
+    console.log("Pastikan semua kolom pembayaran terisi");
+    return;
+  }
+
+  if (
+    parseInt(uangDibayar.replace("Rp. ", "").replace(/,/g, "")) <
+    parseInt(totalTransaksi.replace("Rp. ", "").replace(/,/g, ""))
+  ) {
+    console.log("Uang yang dibayarkan tidak cukup.");
+    return;
+  }
+
+  console.log("Pembayaran berhasil!");
+
+  // Reset form
+  // resetKasir();
+}
+
+// Function untuk mencetak struk pembayaran
+function printStruk() {
+  const totalTransaksi = document.getElementById("total-transaksi").value;
+  const uangDibayar = document.getElementById("uang-dibayar").value;
+  const uangKembalian = document.getElementById("uang-kembalian").value;
+  const tanggalTransaksi = document.getElementById("tanggal-transaksi").value;
+
+  let strukHTML = `
+    <html>
+    <head>
+      <style>
+        body { font-family: 'Courier New', Courier, monospace; }
+        .struk-container { width: 300px; margin: auto; }
+        .struk-header { text-align: center; margin-bottom: 20px; }
+        .struk-footer { text-align: center; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        table th, table td { text-align: left; padding: 5px; }
+        .total, .uang-dibayar, .uang-kembalian { text-align: right; }
+        .line { border-top: 1px dashed #000; margin: 10px 0; }
+        .thank-you { margin-top: 20px; }
+      </style>
+    </head>
+    <body>
+      <div class="struk-container">
+        <div class="struk-header">
+          <h2>Innovatinesia</h2>
+          <p>Daik, Lingga</p>
+        </div>
+        <div class="line"></div>
+        <p>Tanggal Transaksi: ${tanggalTransaksi}</p>
+        <div class="line"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Produk</th>
+              <th>Qty</th>
+              <th>Harga</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+  const rows = document.querySelectorAll("#tabel-kasir tbody tr");
+
+  rows.forEach((row, index) => {
+    const namaProduk = row.querySelector(".nama-produk").innerText;
+    const jumlahProduk = row.querySelector(".jumlah-produk").value;
+    const hargaProduk = row
+      .querySelector(".harga-produk")
+      .getAttribute("data-harga");
+    const totalHarga = parseInt(hargaProduk) * parseInt(jumlahProduk);
+
+    strukHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${namaProduk}</td>
+        <td>${jumlahProduk}</td>
+        <td>Rp. ${parseInt(hargaProduk).toLocaleString()}</td>
+        <td>Rp. ${totalHarga.toLocaleString()}</td>
+      </tr>`;
+  });
+
+  strukHTML += `
+          </tbody>
+        </table>
+        <div class="line"></div>
+        <p class="total">Total Transaksi: Rp. ${totalTransaksi}</p>
+        <p class="uang-dibayar">Uang Dibayar: Rp. ${parseInt(
+          uangDibayar
+        ).toLocaleString()}</p>
+        <p class="uang-kembalian">Uang Kembalian: Rp. ${uangKembalian}</p>
+        <div class="line"></div>
+        <div class="struk-footer">
+          <p class="thank-you">Terima Kasih telah belanja!</p>
+        </div>
+      </div>
+    </body>
+    </html>`;
+
+  const strukWindow = window.open("", "_blank");
+  strukWindow.document.write(strukHTML);
+  strukWindow.document.close();
+  strukWindow.print();
 }
 
 // Panggil fungsi setTanggalTransaksi saat halaman dimuat

@@ -21,7 +21,8 @@
 - [X] Hitung total, total pembayaran, uang kembalian.
 - [X] Tampilkan tanggal transaksi saat ini.
 - [X] Implementasi fitur refresh data transaksi.
-- [ ] Implementasi fitur bayar dan print struk pembelian.
+- [X] Implementasi fitur print struk pembelian.
+- [ ] Implementasi fitur pembayaran menggunakan ajax dan masukkan data transaksi ke database.
 
 ### 4. Kelola Laporan Penjualan
 - [ ] Cari laporan per bulan/tahun atau menggunakan form date.
