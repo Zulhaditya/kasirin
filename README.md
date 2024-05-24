@@ -10,6 +10,7 @@
 - [X] Implementasi fitur tambah produk.
 - [X] Implementasi fitur lihat produk.
 - [X] Implementasi fitur cari produk berdasarkan nama, kategori, dan merk.
+- [X] Implementasi fitur edit dan hapus produk.
 
 ### 3. Kelola Data Transaksi
 - [X] Implementasi fitur pencarian produk dan pagination.
@@ -22,6 +23,8 @@
 - [X] Tampilkan tanggal transaksi saat ini.
 - [X] Implementasi fitur refresh data transaksi.
 - [X] Implementasi fitur print struk pembelian.
+- [X] Perbaiki fitur pencarian produk menggunakan ajax.
+- [ ] Sesuaikan gambar produk berdasarkan nama gambar di database.
 - [ ] Implementasi fitur pembayaran menggunakan ajax dan masukkan data transaksi ke database.
 
 ### 4. Kelola Laporan Penjualan

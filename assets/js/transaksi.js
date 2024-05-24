@@ -17,7 +17,7 @@ function tambahKeKasir(button) {
         </div>
       </td>
       <td>${nomorProduk}</td>
-      <td class="nama-gambar"><img src="${gambar}" class="img-fluid rounded avatar-50 mr-3" alt="image" /></td>
+      <td class="nama-gambar"><img src="../../assets/images/table/product/01.jpg" class="img-fluid rounded avatar-50 mr-3" alt="image" /></td>
       <td class="nama-produk">${namaProduk}</td>
       <td><input type="number" class="form-control w-50 jumlah-produk" value="1" min="1" oninput="updateTotalHarga(this)"></td>
       <td class="harga-produk" data-harga="${hargaProduk}">Rp. ${parseInt(
@@ -201,7 +201,7 @@ function printStruk() {
       <div class="struk-container">
         <div class="struk-header">
           <h2>Innovatinesia</h2>
-          <p>Daik, Lingga</p>
+          <p>Jakarta, Indonesia</p>
         </div>
         <div class="line"></div>
         <p>Tanggal Transaksi: ${tanggalTransaksi}</p>
@@ -211,7 +211,7 @@ function printStruk() {
             <tr>
               <th>No</th>
               <th>Nama Produk</th>
-              <th>Qty</th>
+              <th>Jumlah</th>
               <th>Harga</th>
               <th>Total</th>
             </tr>
@@ -243,10 +243,10 @@ function printStruk() {
         </table>
         <div class="line"></div>
         <p class="total">Total Transaksi: Rp. ${totalTransaksi}</p>
-        <p class="uang-dibayar">Uang Dibayar: Rp. ${parseInt(
+        <p class="uang-dibayar">Total Pembayaran: Rp. ${parseInt(
           uangDibayar
         ).toLocaleString()}</p>
-        <p class="uang-kembalian">Uang Kembalian: Rp. ${uangKembalian}</p>
+        <p class="uang-kembalian">Kembalian: Rp. ${uangKembalian}</p>
         <div class="line"></div>
         <div class="struk-footer">
           <p class="thank-you">Terima Kasih telah belanja!</p>
@@ -277,4 +277,24 @@ document.addEventListener("input", function (event) {
 // Panggil fungsi hitungKembalian setiap kali nominal uang dibayarkan berubah
 document.getElementById("uang-dibayar").addEventListener("input", function () {
   hitungKembalian();
+});
+
+// ------------- Function search data menggunakan ajax -----------------
+let keyword = document.getElementById("keyword");
+let tombolCari = document.getElementById("tombol-cari");
+let dataTable = document.getElementById("table-list");
+
+keyword.addEventListener("keyup", function () {
+  // buat object ajax
+  let xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      dataTable.innerHTML = xhr.responseText;
+    }
+  };
+
+  // eksekusi ajax
+  xhr.open("GET", "ajax/produk.php?keyword=" + keyword.value, true);
+  xhr.send();
 });

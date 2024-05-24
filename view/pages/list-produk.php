@@ -98,7 +98,7 @@ if (isset($_POST["search"])) {
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <img src="../../assets/images/table/product/01.jpg" class="img-fluid rounded avatar-50 mr-3" alt="image" />
+                          <img src="img/<?= $row["gambar"] ?>" class="img-fluid rounded avatar-50 mr-3" alt="image" />
                           <div>
                             <?= $row["nama"]; ?>
                             <p class="mb-0">
@@ -116,8 +116,8 @@ if (isset($_POST["search"])) {
                       <td>
                         <div class="d-flex align-items-center list-action">
                           <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="#"><i class="ri-eye-line mr-0"></i></a>
-                          <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line mr-0"></i></a>
-                          <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                          <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="edit-produk.php?id=<?= $row["id"]; ?>"><i class="ri-pencil-line mr-0"></i></a>
+                          <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="hapus-produk.php?id=<?= $row["id"]; ?>"><i class="ri-delete-bin-line mr-0"></i></a>
                         </div>
                       </td>
                     </tr>

@@ -1,31 +1,28 @@
 <?php
-
-session_start();
-
-// cek apakah sudah dibuat sesion login
-if (!isset($_SESSION["login"])) {
-  header("Location: ../../login.php");
-  exit;
-}
-
 require '../../controller/functions.php';
 
-// cek apakah tombol submit sudah ditekan atau belum
+// ambil data id pada url
+$id = $_GET["id"];
+
+// query data produk berdasarkan id
+$produk = query("SELECT * FROM produk WHERE id = $id")[0];
+
+// cek tombol submit
 if (isset($_POST["submit"])) {
 
-  // cek apakah data berhasil ditambahkan atau tidak
-  if (tambahProduk($_POST) > 0) {
+  // cek apakah data berhasil diubah atau tidak
+  if (edit($_POST) > 0) {
     echo "
       <script>
-        alert('Produk berhasil ditambahkan!');
-        document.location.href = '../../index.php';
+        alert('data berhasil di-update!');
+        document.location.href = 'list-produk.php';
       </script>
     ";
   } else {
     echo "
       <script>
-        alert('Produk gagal ditambahkan.');
-        document.location.href = '../../index.php';
+        alert('data gagal di-update.');
+        document.location.href = 'list-produk.php';
       </script>
     ";
   }
@@ -75,63 +72,66 @@ if (isset($_POST["submit"])) {
               </div>
               <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="<?= $produk["id"]; ?>">
+                  <input type="hidden" name="gambarLama" value="<?= $produk["gambar"]; ?>">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Nama *</label>
-                        <input name="nama" type="text" class="form-control" placeholder="Masukkan nama produk" data-errors="Please Enter Name." required>
+                        <input name="nama" type="text" class="form-control" placeholder="Masukkan nama produk" data-errors="Please Enter Name." required value="<?= $produk["nama"]; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Kategori *</label>
-                        <input name="kategori" type="text" class="form-control" placeholder="Masukkan kategori" data-errors="Kategori masih kosong" required>
+                        <input name="kategori" type="text" class="form-control" placeholder="Masukkan kategori" data-errors="Kategori masih kosong" required value="<?= $produk["kategori"]; ?>">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Harga Jual *</label>
-                        <input name="hargaJual" type="text" class="form-control" placeholder="Masukkan harga jual" data-errors="Harga jual masih kosong" required>
+                        <input name="harga_jual" type="text" class="form-control" placeholder="Masukkan harga jual" required value="<?= $produk["harga_jual"]; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Harga Beli *</label>
-                        <input name="hargaBeli" type="text" class="form-control" placeholder="Masukkan harga beli" data-errors="Harga beli masih kosong" required>
+                        <input name="harga_beli" type="text" class="form-control" placeholder="Masukkan harga beli" required value="<?= $produk["harga_beli"]; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Merk</label>
-                        <input name="merk" type="text" class="form-control" placeholder="Masukkan merk" required>
+                        <input name="merk" type="text" class="form-control" placeholder="Masukkan merk" required value="<?= $produk["merk"]; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Stok *</label>
-                        <input name="stok" type="text" class="form-control" placeholder="Jumlah stok" required>
+                        <input name="stok" type="text" class="form-control" placeholder="Jumlah stok" required value="<?= $produk["stok"]; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Gambar *</label>
+                        <img src="img/<?= $produk["gambar"] ?>" width="70px" height="70px" alt="gambar"> <br> <br>
                         <input id="gambar" name="gambar" type="file" class="form-control image-file" name="pic" accept="image/*">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Satuan</label>
-                        <input name="satuan" type="text" class="form-control" placeholder="pcs/ml" required>
+                        <input name="satuan" type="text" class="form-control" placeholder="pcs/ml" required value="<?= $produk["stok"]; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                   </div>
-                  <button name="submit" type="submit" class="btn btn-primary mr-2">Tambah</button>
+                  <button name="submit" type="submit" class="btn btn-primary mr-2">Edit</button>
                   <button type="reset" class="btn btn-danger">Reset</button>
                 </form>
               </div>

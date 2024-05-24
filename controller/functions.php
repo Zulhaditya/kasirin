@@ -27,7 +27,11 @@ function tambahProduk($data) {
   $hargaJual = htmlspecialchars($data["hargaJual"]);
   $stok = htmlspecialchars($data["stok"]);
   $satuan = htmlspecialchars($data["satuan"]);
-  $gambar = htmlspecialchars($data["gambar"]);
+
+  $gambar = upload();
+  if (!$gambar) {
+    return false;
+  }
 
   // query insert data
   $query = "INSERT INTO produk
@@ -47,11 +51,98 @@ function tambahProduk($data) {
   return mysqli_affected_rows($koneksi);
 }
 
+
+// function upload gambar
+function upload() {
+  // ambil data gambar
+  $namaFile = $_FILES["gambar"]["name"];
+  $sizeFile = $_FILES["gambar"]["size"];
+  $error = $_FILES["gambar"]["error"];
+  $tmpName = $_FILES["gambar"]["tmp_name"];
+
+  // cek apakah tidak ada gambar yang diupload
+  if ($error === 4) {
+    echo "<script>
+        alert('Pilih gambar terlebih dahulu!');
+    </script>";
+    return false;
+  }
+
+  // cek apakah file yang diupload berupa gambar
+  $ekstensiGambarValid = ["jpg", "jpeg", "png"];
+  $ekstensiGambar = explode(".", $namaFile);
+  $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+  if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+    echo "<script>
+        alert('File upload bukan gambar!');
+    </script>";
+    return false;
+  }
+
+  // cek jika gambar ukurannya terlalu besar / 1mb
+  if ($sizeFile > 1000000) {
+    echo "<script>
+        alert('Ukuran gambar terlalu besar.');
+    </script>";
+    return false;
+  }
+
+  // lolos pengecekan, gambar siap untuk diupload
+  // generate nama gambar yang baru menggunakan string random
+  $namaFileBaru = uniqid();
+  $namaFileBaru .= ".";
+  $namaFileBaru .= $ekstensiGambar;
+  move_uploaded_file($tmpName, "img/" . $namaFileBaru);
+
+  return $namaFileBaru;
+}
+
 // function hapus produk
 function hapus($id) {
   global $koneksi;
 
   mysqli_query($koneksi, "DELETE FROM produk WHERE id = $id");
+  return mysqli_affected_rows($koneksi);
+}
+
+// function edit produk
+function edit($data) {
+  global $koneksi;
+
+  // ambil data tiap elemen dari form
+  $id = $data["id"];
+  $nama = htmlspecialchars($data["nama"]);
+  $kategori = htmlspecialchars($data["kategori"]);
+  $merk = htmlspecialchars($data["merk"]);
+  $harga_beli = htmlspecialchars($data["harga_beli"]);
+  $harga_jual = htmlspecialchars($data["harga_jual"]);
+  $stok = htmlspecialchars($data["stok"]);
+  $satuan = htmlspecialchars($data["satuan"]);
+  $gambarLama = htmlspecialchars($data["gambarLama"]);
+
+  // cek apakah gambar memilih gambar baru atau tidak
+  if ($_FILES["gambar"]["error"] === 4) {
+    $gambar = $gambarLama;
+  } else {
+    $gambar = upload();
+  }
+
+  // query update data
+  $query = "UPDATE produk
+            SET
+              nama = '$nama',
+              kategori = '$kategori',
+              merk = '$merk',
+              harga_beli = '$harga_beli',
+              harga_jual = '$harga_jual',
+              stok = '$stok',
+              satuan = '$satuan',
+              gambar = '$gambar'
+            WHERE id = $id
+            ";
+
+  mysqli_query($koneksi, $query);
   return mysqli_affected_rows($koneksi);
 }
 

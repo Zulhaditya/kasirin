@@ -63,12 +63,12 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                 <div class="row">
                   <div class="col-sm-12 mb-4">
                     <form action="" method="post">
-                      <input type="text" class="form-control" name="keyword" autofocus placeholder="Masukkan : Nama / Kategori Barang [ENTER]" autocomplete="off" required>
-                      <button type="submit" name="search" class="btn btn-primary add-list mt-3"><i class="las la-search mr-3"></i>Cari</button>
+                      <input id="keyword" type="text" class="form-control" name="keyword" autofocus placeholder="Masukkan : Nama / Kategori Barang [ENTER]" autocomplete="off" required>
+                      <button id="tombol-cari" type="submit" name="search" class="btn btn-primary add-list mt-3"><i class="las la-search mr-3"></i>Cari</button>
                     </form>
                   </div>
                   <div class="col">
-                    <div class="table-responsive">
+                    <div id="table-list" class="table-responsive">
                       <table id="datatable" class="table table-striped">
                         <thead>
                           <tr class="ligth">
@@ -85,7 +85,9 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                           <?php foreach ($produk as $row) : ?>
                             <tr>
                               <td> <?= $i; ?> </td>
-                              <td> <?= $row["gambar"]; ?> </td>
+                              <td>
+                                <img src="../../assets/images/table/product/01.jpg" class="img-fluid rounded avatar-50 mr-3" alt="image" />
+                              </td>
                               <td><?= $row["nama"]; ?></td>
                               <td><?= $row["merk"]; ?></td>
                               <td><?= $row["harga_jual"]; ?></td>
@@ -137,6 +139,7 @@ if (isset($_POST["search"]) && !empty($_POST["keyword"])) {
                       </tr>
                     </thead>
                     <tbody class="ligth-body">
+
                     </tbody>
                   </table>
                 </div>
